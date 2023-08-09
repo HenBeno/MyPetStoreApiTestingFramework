@@ -15,9 +15,14 @@ public class Routes {
     private final String petBasePATH = BaseURL + "pet";;
 
 
+    ///////////////////////////////////////////////////////////
+    /////////////////////// User method ///////////////////////
+    ///////////////////////////////////////////////////////////
+
     //POST User method
     protected String postCreateListOfUsersByArray = userBasePATH + "/createWithArray";
     protected String postCreateListOfUsersByList = userBasePATH + "/createWithList";
+    protected String postCreateUser = userBasePATH;
 
     //GET User method
     protected String getUserByUserName = userBasePATH + "/{username}";
@@ -25,9 +30,39 @@ public class Routes {
     protected String getLogoutOfSystem = userBasePATH + "/logout";
 
     //PUT User method
-    protected String postCreateUser = userBasePATH;
+    protected String postUpdateUser = userBasePATH + "/{username}";
 
     //DELETE User method
     protected String deleteDeleteUser = userBasePATH + "/{username}";
 
+
+    ///////////////////////////////////////////////////////////
+    /////////////////////// Store method ///////////////////////
+    ///////////////////////////////////////////////////////////
+    //POST Store method
+    protected String postPlaceAnOrder = storeBasePATH + "/order";
+    //GET Store method
+    protected String getFindPurchasedOrderById = storeBasePATH + "/order/{orderId}";
+    protected String getInventoryByStatus = storeBasePATH + "/order";
+    //DELETE Store method
+    protected String deleteRemoveAnOrderById = storeBasePATH + "/order/{orderId}";
+
+
+    ///////////////////////////////////////////////////////////
+    /////////////////////// Pet method ///////////////////////
+    ///////////////////////////////////////////////////////////
+    //POST Store method
+    protected String postUploadImage = petBasePATH + "/{petId}/uploadImage";
+    protected String postAddNewPet = petBasePATH;
+    protected String postUpdatePetWithFormData = petBasePATH + "/{petId}";
+
+    //GET Store method
+    protected String getFindPetByStatus = petBasePATH + "/findByStatus";
+    protected String getFindPetById = petBasePATH + "/{petId}";
+
+    //PUT Store method
+    protected String putUpdateExistingPet = petBasePATH;
+
+    //DELETE Store method
+    protected String deletePet = petBasePATH + "/{petId}";
 }
