@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <!-- Define properties to be used in the configuration -->
+    <Properties>
+        <Property name="basePath">./Logs</Property>
+    </Properties>
+
+    <!-- Configure appenders (output destinations for logs) -->
+    <Appenders>
+        <!-- Console Appender: Output logs to the console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- Rolling File Appender: Output logs to a rolling file -->
+        <RollingFile name="File" fileName="${basePath}/automation.log"
+                     filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+
+            <!-- Trigger rollover when log file size reaches 50 MB -->
+            <SizeBasedTriggeringPolicy size="50 MB"/>
+
+            <!-- Rollover strategy: Keep a maximum of 10 backup log files -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Configure loggers (categories for logging) -->
+    <Loggers>
+        <!-- Root logger: Log at the debug level and use both appenders -->
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>

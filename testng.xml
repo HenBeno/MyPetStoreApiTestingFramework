@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyPetStoreTestSuite">
+    <listeners>
+        <listener class-name="api.utilities.ExtentReportManager"></listener>
+    </listeners>
+    <test name="MyPetStoreTest">
+        <classes>
+            <class name="api.tets.UserTests"/>
+            <class name="api.tets.UserDDT"/>
+        </classes>
+    </test>
+</suite>
