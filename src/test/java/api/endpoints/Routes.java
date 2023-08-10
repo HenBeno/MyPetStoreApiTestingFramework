@@ -25,12 +25,12 @@ public class Routes {
     protected String postCreateUser = userBasePATH;
 
     //GET User method
-    protected String getUserByUserName = userBasePATH + "/{username}";
+    protected String getUserByUserName = userBasePATH + "/{myusername}";
     protected String getLoginIntoSystem = userBasePATH + "/login?username={myusername}&password={mypassword}";
     protected String getLogoutOfSystem = userBasePATH + "/logout";
 
     //PUT User method
-    protected String postUpdateUser = userBasePATH + "/{username}";
+    protected String postUpdateUser = userBasePATH + "/{myusername}";
 
     //DELETE User method
     protected String deleteDeleteUser = userBasePATH + "/{username}";

@@ -40,12 +40,34 @@ public class UserEndPoints extends Routes{
         return response;
     }
 
-    public Response logout(String userName, String password) {
+    public Response logout() {
         Response response =
                 given()
                         .accept(ContentType.JSON)
                         .when()
                         .get(getLogoutOfSystem);
+        return response;
+    }
+
+    public Response getUser(String userName) {
+        Response response =
+                given()
+                        .accept(ContentType.JSON)
+                        .pathParam("myusername", userName)
+                        .when()
+                        .get(getUserByUserName);
+        return response;
+    }
+
+    public Response putUpdateUser(String userName, UserPayload payLoad) {
+        Response response =
+                given()
+                        .contentType(ContentType.JSON)
+                        .accept(ContentType.JSON)
+                        .pathParam("myusername", userName)
+                        .body(payLoad)
+                        .when()
+                        .put(postUpdateUser);
         return response;
     }
 }
