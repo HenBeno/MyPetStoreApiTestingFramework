@@ -1,18 +1,27 @@
 package api.endpoints;
 
+import java.util.ResourceBundle;
+
 public class Routes {
 
     //Base URL
-    private final String BaseURL = "https://petstore.swagger.io/v2/";
+    private final String BaseURL = getDataFromResource().getString("BaseURL");
 
     //User Base PATH
     private final String userBasePATH = BaseURL + "user";
 
     //Store Base PATH
-    private final String storeBasePATH = BaseURL + "store";;
+    private final String storeBasePATH = BaseURL + "store";
 
     //Pet Base PATH
-    private final String petBasePATH = BaseURL + "pet";;
+    private final String petBasePATH = BaseURL + "pet";
+
+    public ResourceBundle getDataFromResource() {
+        //This is using to get our base url from the properties file
+        //The default path of getBundle() is {project)/test/resources
+        ResourceBundle routes = ResourceBundle.getBundle("Routes");
+        return routes;
+    }
 
 
     ///////////////////////////////////////////////////////////

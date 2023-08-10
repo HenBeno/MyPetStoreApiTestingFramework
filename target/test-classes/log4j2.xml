@@ -9,9 +9,9 @@
     <!-- Configure appenders (output destinations for logs) -->
     <Appenders>
         <!-- Console Appender: Output logs to the console -->
-<!--        <Console name="Console" target="SYSTEM_OUT">-->
-<!--            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
-<!--        </Console>-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
 
         <!-- Rolling File Appender: Output logs to a rolling file -->
         <RollingFile name="File" fileName="${basePath}/automation.log"
@@ -30,7 +30,7 @@
     <Loggers>
         <!-- Root logger: Log at the debug level and use both appenders -->
         <Root level="debug">
-<!--            <AppenderRef ref="Console"/>-->
+            <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Root>
     </Loggers>
