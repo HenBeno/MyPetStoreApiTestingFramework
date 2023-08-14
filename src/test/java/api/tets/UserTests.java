@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 
 public class UserTests extends UserEndPoints{
     UserPayload userPayload;
+    UserPayload userPayload2;
+    UserPayload userPayload3;
     Faker faker;
     public Logger logger;
 
@@ -22,7 +24,7 @@ public class UserTests extends UserEndPoints{
         logger.info("Create user payload");
         faker = new Faker();
         userPayload = new UserPayload(
-                faker.idNumber().hashCode(),
+                faker.random().nextInt(1000000),
                 faker.name().username(),
                 faker.name().firstName(),
                 faker.name().lastName(),
@@ -30,12 +32,32 @@ public class UserTests extends UserEndPoints{
                 faker.internet().password(),
                 faker.phoneNumber().phoneNumber()
         );
-        logger.debug("idNumber: " + userPayload.getId() +
-                "\nusername: " + userPayload.getUsername() +
-                "\nfirstName: " + userPayload.getFirstName() +
-                "\nlastName: " + userPayload.getLastName() +
-                "\nemailAddress: " + userPayload.getEmail() +
-                "\nphoneNumber: " + userPayload.getPhone()
+
+        userPayload2 = new UserPayload(
+                faker.random().nextInt(1000000),
+                faker.name().username(),
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
+                faker.phoneNumber().phoneNumber()
+        );
+
+        userPayload3 = new UserPayload(
+                faker.random().nextInt(1000000),
+                faker.name().username(),
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
+                faker.phoneNumber().phoneNumber()
+        );
+        logger.debug("idNumber: " + userPayload.getId() + userPayload2.getId() + userPayload3.getId() +
+                "\nusername: " + userPayload.getUsername() + userPayload2.getUsername() + userPayload3.getUsername() +
+                "\nfirstName: " + userPayload.getFirstName() + userPayload2.getFirstName() + userPayload3.getFirstName() +
+                "\nlastName: " + userPayload.getLastName() + userPayload2.getLastName() + userPayload3.getLastName() +
+                "\nemailAddress: " + userPayload.getEmail() + userPayload2.getEmail() + userPayload3.getEmail() +
+                "\nphoneNumber: " + userPayload.getPhone() + userPayload2.getPhone() + userPayload3.getPhone()
         );
     }
 
@@ -103,11 +125,30 @@ public class UserTests extends UserEndPoints{
     }
 
     @Test(testName = "TC7 - Get user by Username that not exist - Negative test", priority = 6)
-    public void getUserNegativeTC(){
+    public void findUserNegativeTC(){
         logger.info("Try to find user that not exits");
         Response res = getUser(userPayload.getUsername());
         res.then().log().all();
         Assert.assertEquals(res.getStatusCode(), 404);
         logger.info("User not found - Negative tests");
+    }
+
+    @Test(testName = "TC8 - Create number of users by list payload", priority = 7)
+    public void createUserByList(){
+
+        logger.info("Create list os users");
+        UserPayload[] userList = {userPayload2, userPayload3};
+        Response res = postCreateUserByList(userList);
+        res.then().log().all();
+        Assert.assertEquals(res.getStatusCode(), 200);
+
+        for (UserPayload user : userList) {
+            logger.info(String.format("Verify %s is create", user.getUsername()));
+            Response res2 = getUser(user.getUsername());
+            res2.then().log().all();
+            Assert.assertEquals(res2.getStatusCode(), 200);
+            logger.info(String.format("%s is created", user.getUsername()));
+        }
+        logger.info("All users created successfully");
     }
 }

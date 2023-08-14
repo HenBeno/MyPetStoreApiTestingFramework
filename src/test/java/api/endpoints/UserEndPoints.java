@@ -70,4 +70,26 @@ public class UserEndPoints extends Routes{
                         .put(postUpdateUser);
         return response;
     }
+
+    public Response postCreateUserByList(UserPayload[] payLoad) {
+        Response response =
+                given()
+                        .contentType(ContentType.JSON)
+                        .accept(ContentType.JSON)
+                        .body(payLoad)
+                        .when()
+                        .post(postCreateListOfUsersByList);
+        return response;
+    }
+
+    public Response postCreateUserByArray(UserPayload[] payLoad) {
+        Response response =
+                given()
+                        .contentType(ContentType.JSON)
+                        .accept(ContentType.JSON)
+                        .body(payLoad)
+                        .when()
+                        .post(postCreateListOfUsersByArray);
+        return response;
+    }
 }
